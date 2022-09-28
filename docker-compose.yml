@@ -1,0 +1,14 @@
+version: '3.6'
+
+services:
+
+  db:
+    image: postgres:14.5
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: inventory
+      POSTGRES_PASSWORD: example
+    volumes:
+      - ./init-db/:/docker-entrypoint-initdb.d/
