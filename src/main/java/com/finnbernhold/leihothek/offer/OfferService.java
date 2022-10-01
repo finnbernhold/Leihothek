@@ -13,8 +13,8 @@ public class OfferService {
         this.repo = repo;
     }
 
-    public void addOffer(String title, String description){
-        repo.save(new Offer(null, title, description));
+    public void addOffer(Offer offer){
+        repo.save(offer);
     }
     public Offer showOfferById(Integer id){
         return repo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Offer not found"));

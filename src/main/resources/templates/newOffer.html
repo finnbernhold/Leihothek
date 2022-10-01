@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Anzeige hinzufügen</title>
+</head>
+    <body>
+    <section layout:fragment="content">
+        <form action="#" th:object="${blankOffer}" method="post">
+            <div class="form-group">
+                <p>Titel: <input class="form-control" type="text" required th:field="*{title}"></p>
+                <p>Beschreibung: <input class="form-control" type="text" required th:field="*{description}"></p>
+                <input class="btn btn-primary" type="submit" value="Speichern">
+            </div>
+        </form>
+    </section>
+    </body>
+</html>

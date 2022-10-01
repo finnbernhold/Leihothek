@@ -1,8 +1,12 @@
 package com.finnbernhold.leihothek.offer;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
-@RestController
+@Controller
 public class OfferController {
     private final OfferService service;
 
@@ -10,22 +14,14 @@ public class OfferController {
         this.service = service;
     }
 
-    @PostMapping("/add")
-    public String addOffer(@RequestParam String title, @RequestParam String description){
-        service.addOffer(title, description);
-        return "saved book";
+    @GetMapping("/newOffer")
+    public String newOfferForm(Model model){
+        model.addAttribute("blankOffer", new Offer(null, null, null));
+        return "newOffer";
     }
-    @GetMapping("/show/{id}")
-    public Offer showOfferById(@PathVariable Integer id){
-        return service.showOfferById(id);
-    }
-    @GetMapping("/show")
-    public Iterable<Offer> showAllOffers(){
-        return service.showAllOffers();
-    }
-    @DeleteMapping("/delete/{id}")
-    public String deleteById(@PathVariable Integer id){
-        service.deleteById(id);
-        return "deleted";
+    @PostMapping("/newOffer")
+    public String newOffer(@ModelAttribute Offer newOffer){
+        service.addOffer(newOffer);
+        return "redirect:/newOffer";
     }
 }
