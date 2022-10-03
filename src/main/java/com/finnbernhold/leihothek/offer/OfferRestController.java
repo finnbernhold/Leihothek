@@ -12,10 +12,10 @@ public class OfferRestController {
 
     @PostMapping("/add")
     public String addOffer(@RequestParam String title, @RequestParam String description){
-        service.addOffer(new Offer(null, title, description));
+        service.addOffer(new Offer(null, title, description, null));
         return "saved book";
     }
-    @GetMapping("/show/{id}")
+    @GetMapping("/offer/{id}")
     public Offer showOfferById(@PathVariable Integer id){
         return service.showOfferById(id);
     }

@@ -16,12 +16,12 @@ public class OfferController {
 
     @GetMapping("/newOffer")
     public String newOfferForm(Model model){
-        model.addAttribute("blankOffer", new Offer(null, null, null));
-        return "newOffer";
+        model.addAttribute("blankOffer", new Offer(null, null, null, null));
+        return "addOffer";
     }
     @PostMapping("/newOffer")
     public String newOffer(@ModelAttribute Offer newOffer){
         service.addOffer(newOffer);
-        return "redirect:/newOffer";
+        return "redirect:/";
     }
 }
