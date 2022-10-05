@@ -2,10 +2,10 @@ package com.finnbernhold.leihothek.offer;
 
 import com.finnbernhold.leihothek.db.OfferRepository;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-@Component
+@Service
 public class OfferService {
     private final OfferRepository repo;
 

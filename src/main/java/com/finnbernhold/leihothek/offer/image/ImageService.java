@@ -1,9 +1,11 @@
 package com.finnbernhold.leihothek.offer.image;
 
 import com.finnbernhold.leihothek.db.ImageRepository;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+@Service
 public class ImageService {
     private final ImageRepository imageRepository;
 
