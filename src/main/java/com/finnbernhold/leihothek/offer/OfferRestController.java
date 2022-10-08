@@ -10,20 +10,20 @@ public class OfferRestController {
         this.service = service;
     }
 
-    @PostMapping("/add")
+    @PostMapping("/api/add")
     public String addOffer(@RequestParam String title, @RequestParam String description){
         service.addOffer(new Offer(null, title, description));
         return "saved book";
     }
-    @GetMapping("/offer/{id}")
+    @GetMapping("/api/offer/{id}")
     public Offer showOfferById(@PathVariable Integer id){
         return service.showOfferById(id);
     }
-    @GetMapping("/show")
+    @GetMapping("/api/show")
     public Iterable<Offer> showAllOffers(){
         return service.showAllOffers();
     }
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/api/delete/{id}")
     public String deleteById(@PathVariable Integer id){
         service.deleteById(id);
         return "deleted";
