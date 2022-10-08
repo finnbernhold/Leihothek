@@ -12,4 +12,6 @@ create table image
     title     TEXT  NOT NULL,
     mime_type TEXT  NOT NULL,
     image     BYTEA NOT NULL
+
+
 );
