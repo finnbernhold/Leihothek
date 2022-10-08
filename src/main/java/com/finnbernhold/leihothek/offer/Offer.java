@@ -8,7 +8,6 @@ public record Offer(
         @Id
         Integer id,
         String title,
-        String description,
-        Integer imageId
+        String description
 ){
 }

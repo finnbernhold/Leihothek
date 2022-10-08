@@ -19,7 +19,7 @@ public class OfferController {
 
     @GetMapping("/newOffer")
     public String newOfferForm(Model model){
-        model.addAttribute("blankOffer", new Offer(null, null, null, null));
+        model.addAttribute("blankOffer", new Offer(null, null, null));
         return "addOffer";
     }
     @PostMapping("/newOffer")
