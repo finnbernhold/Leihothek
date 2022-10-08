@@ -7,6 +7,7 @@ import org.springframework.data.relational.core.mapping.Table;
 public record Image(
         @Id
         Integer id,
+        String title,
         byte[] image,
         String mimeType
 ) {}
