@@ -44,5 +44,6 @@ public class ImageController {
     public ResponseEntity<byte[]> showImage(@PathVariable Integer id) {
         Image img = imageService.getImage(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Image not found"));
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(img.mimeType())).body(img.image());
+
     }
 }
