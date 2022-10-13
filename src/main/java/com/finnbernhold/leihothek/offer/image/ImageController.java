@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 
@@ -32,12 +31,12 @@ public class ImageController {
     }
 
     @PostMapping("/offer/{id}/image/upload")
-    public String addImageToBike(@RequestParam("title") String title, @RequestParam("image") MultipartFile image, @PathVariable Integer id, RedirectAttributes redirectAttributes) throws IOException {
+    public String addImageToBike(@RequestParam("title") String title, @RequestParam("image") MultipartFile image, @PathVariable Integer id) throws IOException {
         Integer imageId = imageService.addImage(title, image);
+        System.out.println(imageId);
         Offer offer = offerRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Offer not found"));
         Offer updatedOffer = new Offer(offer.id(), offer.title(), offer.description(), imageId);
         offerRepository.save(updatedOffer);
-        redirectAttributes.addFlashAttribute("alert", "Image uploaded");
         return "redirect:/";
     }
     @GetMapping("/image/{id}")
