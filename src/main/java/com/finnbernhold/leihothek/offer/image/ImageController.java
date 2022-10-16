@@ -30,15 +30,16 @@ public class ImageController {
         return "ImageUpload";
     }
 
-    @PostMapping("/offer/{id}/image/upload")
+    @PostMapping("/offer/image/upload")
     public String addImageToBike(@RequestParam("title") String title, @RequestParam("image") MultipartFile image, @PathVariable Integer id) throws IOException {
         Integer imageId = imageService.addImage(title, image);
-        System.out.println(imageId);
+        System.out.println("hahahahaha");
         Offer offer = offerRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Offer not found"));
         Offer updatedOffer = new Offer(offer.id(), offer.title(), offer.description(), imageId);
         offerRepository.save(updatedOffer);
         return "redirect:/";
     }
+
     @GetMapping("/image/{id}")
     public ResponseEntity<byte[]> showImage(@PathVariable Integer id) {
         Image img = imageService.getImage(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Image not found"));

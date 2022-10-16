@@ -6,11 +6,12 @@
 </head>
 <body>
     <section layout:fragment="content">
-        <div style="width: 75%; margin: auto; border: 1px solid; padding: 10px; box-shadow: 5px 10px red;">
-            <img class="rounded mx-auto d-block img-fluid" style="margin-top: 50px; width: 45%;" alt="sample" th:src="${'/image/' + offer.imageId()}"/>
+        <div class="col-md-8" style= "margin: auto; border: 1px solid; padding: 10px; box-shadow: 5px 10px red;">
+            <img class="col-md-8 rounded mx-auto d-block img-fluid" style="margin-top: 50px;" alt="sample" th:src="${'/image/' + offer.imageId()}"/>
             <h1 style="text-align: center; margin-top:20px" th:text="${offer.title()}"></h1>
-            <h3 style="margin: 50px 0 0 50px">Beschreibung:</h3>
-            <p th:text="${offer.description()}" style="margin: 25px 0 0 75px"></p>
+            <h3 style="margin: 50px 0 0 20px">Beschreibung</h3>
+            <hr>
+            <p th:text="${offer.description()}" style="margin: 25px 0 0 20px"></p>
         </div>
     </section>
 </body>
