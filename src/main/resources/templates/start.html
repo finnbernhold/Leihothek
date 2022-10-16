@@ -8,19 +8,25 @@
             height: 100%;
             width: 15rem;
         }
-    </style>
+        @media only screen and (max-width: 992px) {
+          .credits {
+            text-align:center;
+          }
+        }
+</style>
+
 </head>
 <body>
 <section layout:fragment="content">
     <div class="container-fluid">
         <div class="row gy-3" style="overflow: hidden;">
-            <div class="col-lg-4" th:each="offer : ${offers}">
+            <div class="col-lg-4 credits" th:each="offer : ${offers}">
                 <div style="margin-right:30px; height:100%; display: inline-block;">
                     <a th:href="@{/offer/__${offer.id()}__}" style="text-decoration: none;">
                         <div class="offer card" style="overflow: hidden;">
                             <img style="display: block;" th:src="@{/image/__${offer.imageId()}__}" class="card-img" alt="no image">
                             <div class="card-body">
-                                <h1 class="card-title" style="font-size: 35px;color: black;" th:text = "${offer.title()}"></h1>
+                                <h1 class="card-title" style="font-size: 25px;color: black;" th:text = "${offer.title()}"></h1>
                             </div>
                         </div>
                     </a>

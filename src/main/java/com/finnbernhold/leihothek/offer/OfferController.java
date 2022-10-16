@@ -1,20 +1,18 @@
 package com.finnbernhold.leihothek.offer;
 
-import com.finnbernhold.leihothek.offer.image.ImageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class OfferController {
     private final OfferService offerService;
-    private final ImageService imageService;
 
-    public OfferController(OfferService offerService, ImageService imageService) {
+    public OfferController(OfferService offerService) {
         this.offerService = offerService;
-        this.imageService = imageService;
     }
 
     @GetMapping("/newOffer")
@@ -26,5 +24,11 @@ public class OfferController {
     public String newOffer(@ModelAttribute Offer newOffer){
         offerService.addOffer(newOffer);
         return "redirect:/";
+    }
+
+    @GetMapping("/offer/{id}")
+    public String showOfferForm(@PathVariable Integer id, Model model){
+        model.addAttribute("offer", offerService.findOfferById(id));
+        return "offerView";
     }
 }

@@ -16,10 +16,10 @@ public class OfferService {
     public void addOffer(Offer offer){
         repo.save(offer);
     }
-    public Offer showOfferById(Integer id){
+    public Offer findOfferById(Integer id){
         return repo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Offer not found"));
     }
-    public Iterable<Offer> showAllOffers(){
+    public Iterable<Offer> findAllOffers(){
         return repo.findAll();
     }
     public void deleteById(Integer id){
