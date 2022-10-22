@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
 <head>
     <meta charset="UTF-8">
     <title th:text="${offer.title()}"></title>
 </head>
 <body>
     <section layout:fragment="content">
-        <div class="col-md-8" style= "margin: auto; border: 1px solid; padding: 10px; box-shadow: 5px 10px red;">
-            <img class="col-md-8 rounded mx-auto d-block img-fluid" style="margin-top: 50px;" alt="sample" th:src="${'/image/' + offer.imageId()}"/>
+        <div class="col-md-8" style= "margin: auto; border: 1px solid; padding: 10px; box-shadow: 5px 10px black;">
+            <img class="col-md-8 rounded mx-auto d-block img-fluid" onerror="this.src='https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg';" style="margin-top: 50px;" alt="sample" th:src="${'/image/' + offer.imageId()}"/>
             <h1 style="text-align: center; margin-top:20px" th:text="${offer.title()}"></h1>
             <h3 style="margin: 50px 0 0 20px">Beschreibung</h3>
             <hr>
