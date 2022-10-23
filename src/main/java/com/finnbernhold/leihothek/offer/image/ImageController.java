@@ -30,7 +30,7 @@ public class ImageController {
         return "ImageUpload";
     }
 
-    @PostMapping("/offer/image/upload")
+    @PostMapping("/offer/{id}/image/upload")
     public String addImageToBike(@RequestParam("title") String title, @RequestParam("image") MultipartFile image, @PathVariable Integer id) throws IOException {
         Integer imageId = imageService.addImage(title, image);
         System.out.println("hahahahaha");
