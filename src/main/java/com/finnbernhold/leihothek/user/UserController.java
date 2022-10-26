@@ -9,10 +9,12 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Objects;
 
 
 @Controller
@@ -43,11 +45,31 @@ public class UserController {
     public String addUser(@RequestParam String userName, @RequestParam String password, @RequestParam String authority){
         final User user = new User(userName, passwordEncoder.encode(password), AuthorityUtils.createAuthorityList(authority));
         userDetailsManager.createUser(user);
-        return "redirect: /admin/users";
+        return "redirect:/admin/users";
     }
 
     @GetMapping("/admin/users/add")
     public String addUserForm(){
         return "addUser";
+    }
+
+    @PostMapping("/admin/users/{userName}/delete")
+    public String deleteUser(@PathVariable String userName){
+        userDetailsManager.deleteUser(userName);
+        return "redirect:/users";
+    }
+    @GetMapping("/changePassword")
+    public String changePasswordForm(){
+        return "changePassword";
+    }
+
+    @PostMapping("/changePassword")
+    public String changePassword(@RequestParam String newPassword1, @RequestParam String newPassword2, @RequestParam String oldPassword){
+        if (Objects.equals(newPassword1, newPassword2)){
+            userDetailsManager.changePassword(oldPassword, passwordEncoder.encode(newPassword1));
+            return "redirect:/";
+        }else {
+            return "redirect:/changePassword";
+        }
     }
 }

@@ -12,6 +12,10 @@
             <h3 style="margin: 50px 0 0 20px">Beschreibung</h3>
             <hr>
             <p th:text="${offer.description()}" style="margin: 25px 0 0 20px"></p>
+            <hr>
+            <div>
+                Angebot von <a th:href="@{/user/__${offer.createdBy()}__}" th:text="${offer.createdBy()}">user</a>
+            </div>
         </div>
     </section>
 </body>

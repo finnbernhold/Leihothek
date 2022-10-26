@@ -19,9 +19,8 @@
 <body>
 <section layout:fragment="content">
     <div class="container-fluid">
-        <p th:text="${count} + ' Ergebnisse'"></p>
         <div class="row gy-3" style="overflow: hidden;">
-            <div class="col-lg-4 credits" th:each="offer : ${offers}">
+            <div class="col-lg-4 credits" th:each="offer : ${offersOfUser}">
                 <div style="margin-right:30px; height:100%; display: inline-block;">
                     <a th:href="@{/offer/__${offer.id()}__}" style="text-decoration: none;">
                         <div class="offer card" style="overflow: hidden;">

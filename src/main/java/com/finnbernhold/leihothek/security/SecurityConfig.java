@@ -23,7 +23,7 @@ public class SecurityConfig {
                 .and()
                 .httpBasic()
                 .and()
-                .authorizeRequests()
+                .authorizeRequests().antMatchers("/admin/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated();
         return http.build();
     }

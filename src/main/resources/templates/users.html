@@ -9,10 +9,22 @@
       <tr>
         <th>Name</th>
         <th>Berechtigung</th>
+        <th>Aktionen</th>
       </tr>
       <tr th:each="user : ${simpleUsers}">
         <td th:text="${user.userName}"></td>
         <td th:text="${user.authority}"></td>
+
+        <td nowrap>
+          <div class="input-group">
+            <form method="post" th:action="@{/admin/users/__${user.userName()}__/delete}">
+              <button type="submit" class="btn hidden-button"
+                      onclick="return confirm('Are you sure you want to delete this user?');">
+                <i class="fa fa-trash"></i>
+              </button>
+            </form>
+          </div>
+        </td>
       </tr>
     </table>
   </section>
