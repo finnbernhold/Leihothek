@@ -3,15 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${offer.title()}"></title>
+    <style>
+        .force-line-break {
+            height: auto;
+            word-break: break-all;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: pre-line;
+        }
+    </style>
 </head>
 <body>
     <section layout:fragment="content">
         <div class="col-md-8" style= "margin: auto; border: 1px solid; padding: 10px; box-shadow: 5px 10px red;">
-            <img class="col-md-8 rounded mx-auto d-block img-fluid" style="margin-top: 50px;" alt="sample" th:src="${'/image/' + offer.imageId()}"/>
+            <img class="col-md-8 rounded mx-auto d-block img-fluid" style="margin-top: 50px;" alt="sample" onerror="this.src='http://localhost:8080/no-image.jpg'" th:src="${'/image/' + offer.imageId()}"/>
             <h1 style="text-align: center; margin-top:20px" th:text="${offer.title()}"></h1>
             <h3 style="margin: 50px 0 0 20px">Beschreibung</h3>
             <hr>
-            <p th:text="${offer.description()}" style="margin: 25px 0 0 20px"></p>
+            <pre>
+                <p th:text="${offer.description()}" style="margin: 25px 0 0 20px;" class="force-line-break"></p>
+            </pre>
             <hr>
             <div>
                 Angebot von <a th:href="@{/user/__${offer.createdBy()}__}" th:text="${offer.createdBy()}">user</a>

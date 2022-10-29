@@ -2,7 +2,6 @@ package com.finnbernhold.leihothek.offer;
 
 import com.finnbernhold.leihothek.db.OfferRepository;
 import org.springframework.http.HttpStatus;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -12,9 +11,8 @@ import java.util.List;
 @Service
 public class OfferService {
     private final OfferRepository repo;
-    public OfferService(OfferRepository repo, JdbcTemplate template) {
+    public OfferService(OfferRepository repo) {
         this.repo = repo;
-        this.template = template;
     }
 
     public void addOffer(Offer offer){
@@ -39,8 +37,5 @@ public class OfferService {
 
     public List<Offer> getFilteredOffers(String query){
         return repo.findByTitleContainingIgnoreCase(query);
-    }
-    public Integer countResults(String query){
-        return repo.countByTitle(query);
     }
 }

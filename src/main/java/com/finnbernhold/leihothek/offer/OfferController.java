@@ -1,5 +1,6 @@
 package com.finnbernhold.leihothek.offer;
 
+import com.finnbernhold.leihothek.offer.image.ImageService;
 import org.apache.commons.collections4.IterableUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +12,11 @@ import java.util.List;
 @Controller
 public class OfferController {
     private final OfferService offerService;
+    private final ImageService imageService;
 
-    public OfferController(OfferService offerService) {
+    public OfferController(OfferService offerService, ImageService imageService) {
         this.offerService = offerService;
+        this.imageService = imageService;
     }
 
     @GetMapping("/newOffer")
@@ -57,6 +60,17 @@ public class OfferController {
     public String showAllOffersOfUser(Model model, @PathVariable String userName){
         model.addAttribute("offersOfUser", offerService.findAllOffersOfUser(userName));
         return "offersOfUser";
+    }
+
+    @PostMapping("/offer/{id}/delete")
+    public String deleteOffer(@PathVariable Integer id){
+        Offer offer = offerService.findOfferById(id);
+        if(offer.imageId() != null){
+            imageService.deleteById(offerService.findOfferById(id).imageId());
+
+        }
+        offerService.deleteById(id);
+        return "redirect:/ownOffers";
     }
 
 
