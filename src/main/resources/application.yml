@@ -1,10 +1,21 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/inventory
-    username: postgres
-    password: example
+    url: jdbc:mysql://localhost:5432
+    username: k27
+    password: k27
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
 
   servlet:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+  sql:
+    init:
+      mode: always
+      platform: mysql
+
+server:
+  port: 8089
