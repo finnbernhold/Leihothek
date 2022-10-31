@@ -16,7 +16,9 @@
 <body>
     <section layout:fragment="content">
         <div class="col-md-8" style= "margin: auto; border: 1px solid; padding: 10px; box-shadow: 5px 10px red;">
-            <img class="col-md-8 rounded mx-auto d-block img-fluid" style="margin-top: 50px;" alt="sample" onerror="this.src='http://localhost:8080/no-image.jpg'" th:src="${'/image/' + offer.imageId()}"/>
+            <button class="btn">
+                <img class="col-md-8 rounded mx-auto d-block img-fluid" style="margin-top: 50px;" alt="sample" onerror="this.src='http://localhost:8080/no-image.jpg'" th:src="${'/image/' + offer.imageId()}" data-bs-toggle="modal" data-target=".bd-example-modal-lg" data-bs-target="#imageModal" th:data-bs-image-url="${'/image/' + offer.imageId()}"/>
+            </button>
             <h1 style="text-align: center; margin-top:20px" th:text="${offer.title()}"></h1>
             <h3 style="margin: 50px 0 0 20px">Beschreibung</h3>
             <hr>
@@ -28,6 +30,37 @@
                 Angebot von <a th:href="@{/user/__${offer.createdBy()}__}" th:text="${offer.createdBy()}">user</a>
             </div>
         </div>
+
+
+        <div class="modal fade bd-example-modal-lg" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <img class="modalImage rounded mx-auto d-block w-100" alt="no image" src="">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+
+            const imageModal = document.getElementById('imageModal');
+            imageModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                const imageUrl = button.getAttribute('data-bs-image-url');
+                const modalImage = imageModal.querySelector('.modalImage');
+
+                modalImage.src = imageUrl;
+            })
+        </script>
     </section>
 </body>
 </html>
