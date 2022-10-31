@@ -42,19 +42,14 @@
                         <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton1">
                             <li><h3 style="text-align: center"><div sec:authentication="name"></div></h3></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <form method="post" action="/logout">
-                                    <input type="submit" class="dropdown-item" value="Log out">
+                            <li sec:authorize="hasAuthority('ADMIN')">
+                                <form method="get" action="/admin/users/add">
+                                    <input type="submit" class="dropdown-item" value="Benutzer hinzufügen">
                                 </form>
                             </li>
-                            <li>
-                                <form method="get" action="/changePassword">
-                                    <input type="submit" class="dropdown-item" value="Change password">
-                                </form>
-                            </li>
-                            <li>
-                                <form method="get" action="/ownOffers">
-                                    <input type="submit" class="dropdown-item" value="Meine Angebote">
+                            <li sec:authorize="hasAuthority('ADMIN')">
+                                <form method="get" action="/admin/users">
+                                    <input type="submit" class="dropdown-item" value="Benutzer verwalten">
                                 </form>
                             </li>
                             <li>
@@ -62,11 +57,26 @@
                                     <input type="submit" class="dropdown-item" value="Neues Angebot">
                                 </form>
                             </li>
+                            <li>
+                                <form method="get" action="/ownOffers">
+                                    <input type="submit" class="dropdown-item" value="Meine Angebote">
+                                </form>
+                            </li>
+
+                            <li>
+                                <form method="get" action="/changePassword">
+                                    <input type="submit" class="dropdown-item" value="Passwort Ändern">
+                                </form>
+                            </li>
+                            <li>
+                                <form method="post" action="/logout">
+                                    <input type="submit" class="dropdown-item" value="Abmelden">
+                                </form>
+                            </li>
                         </ul>
                     </div>
                 </li>
             </ul>
-
         </div>
 
     </nav>

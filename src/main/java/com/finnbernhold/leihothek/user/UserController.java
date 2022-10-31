@@ -56,7 +56,7 @@ public class UserController {
     @PostMapping("/admin/users/{userName}/delete")
     public String deleteUser(@PathVariable String userName){
         userDetailsManager.deleteUser(userName);
-        return "redirect:/users";
+        return "redirect:/admin/users";
     }
     @GetMapping("/changePassword")
     public String changePasswordForm(){
