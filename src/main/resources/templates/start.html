@@ -19,7 +19,8 @@
 <body>
 <section layout:fragment="content">
     <div class="container-fluid">
-        <p th:text="${count} + ' Ergebnisse'"></p>
+        <p th:text="${count} + ' Ergebnisse'" th:if="${count > 1}"></p>
+        <p th:text="${count} + ' Ergebnis'" th:if="${count <= 1}"></p>
         <div class="row gy-3" style="overflow: hidden;">
             <div class="col-lg-4 credits" th:each="offer : ${offers}">
                 <div style="margin-right:30px; height:100%; display: inline-block;">
