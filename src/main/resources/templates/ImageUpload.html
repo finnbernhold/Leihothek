@@ -3,19 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Upload Image</title>
-    <style>
-        .img_src{
-            appearance: none;
-            font-family: 'FontAwesome';
-            content: '\f069';
-        }
-    </style>
 </head>
 <body>
 <section layout:fragment="content">
     <h1>Upload new Photo</h1>
     <form method="POST" enctype="multipart/form-data">
-        Title:<input class="form-control" type="text" name="title"/>
         Image:<input class="form-control background-primary" type="file" name="image" accept="image/*"/>
         <input class="btn btn-primary" style="margin-top: 15px" type="submit" value="Upload"/>
     </form>

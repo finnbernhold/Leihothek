@@ -15,8 +15,8 @@ public class ImageService {
         this.imageRepository = repository;
     }
 
-    public Integer addImage(String title, MultipartFile file) throws IOException {
-        Image img = new Image(null, title, file.getBytes(), file.getContentType());
+    public Integer addImage(MultipartFile file) throws IOException {
+        Image img = new Image(null, file.getBytes(), file.getContentType());
         img = imageRepository.save(img);
         return img.id();
     }

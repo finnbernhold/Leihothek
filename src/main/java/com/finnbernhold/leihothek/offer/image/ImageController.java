@@ -31,8 +31,8 @@ public class ImageController {
     }
 
     @PostMapping("/offer/{id}/image/upload")
-    public String addImageToBike(@RequestParam("title") String title, @RequestParam("image") MultipartFile image, @PathVariable Integer id) throws IOException {
-        Integer imageId = imageService.addImage(title, image);
+    public String addImageToBike(@RequestParam("image") MultipartFile image, @PathVariable Integer id) throws IOException {
+        Integer imageId = imageService.addImage(image);
         Offer offer = offerRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Offer not found"));
         Offer updatedOffer = new Offer(offer.id(), offer.title(), offer.description(), imageId, offer.createdBy());
         offerRepository.save(updatedOffer);

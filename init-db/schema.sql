@@ -10,7 +10,6 @@ CREATE TABLE offer
 CREATE TABLE image
 (
     id        SERIAL PRIMARY KEY,
-    title     TEXT  NOT NULL,
     mime_type TEXT  NOT NULL,
     image     BYTEA NOT NULL
 
