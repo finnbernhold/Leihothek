@@ -31,6 +31,7 @@
             <div>
                 Angebot von <a th:href="@{/user/__${offer.createdBy()}__}" th:text="${offer.createdBy()}">user</a>
             </div>
+            <p th:text="${offer.category().displayText()}"></p>
         </div>
 
 

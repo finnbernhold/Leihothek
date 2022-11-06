@@ -12,6 +12,8 @@ public interface OfferRepository extends CrudRepository<Offer, Integer> {
 
     @Query("SELECT * from offer o where o.created_by =:userName ")
     List<Offer> findAllOffersOfUser(@Param("userName") String userName);
+    @Query("SELECT * from offer o where o.category like :category AND strpos(title, :query) > 0")
+    List<Offer> findByTitleAndCategoryContainingIgnoreCase(String category, String query);
 
     List<Offer> findByTitleContainingIgnoreCase(String title);
 

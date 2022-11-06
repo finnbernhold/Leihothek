@@ -35,7 +35,10 @@ public class OfferService {
         return repo.findAllOffersOfUser(user);
     }
 
-    public List<Offer> getFilteredOffers(String query){
+    public List<Offer> findOffersByTitle(String query){
         return repo.findByTitleContainingIgnoreCase(query);
+    }
+    public List<Offer> findOffersByTitleAndCategory(String category, String query){
+        return repo.findByTitleAndCategoryContainingIgnoreCase(category, query);
     }
 }

@@ -9,6 +9,7 @@ public record Offer(
         Integer id,
         String title,
         String description,
+        Categories category,
         Integer imageId,
         @CreatedBy
         String createdBy

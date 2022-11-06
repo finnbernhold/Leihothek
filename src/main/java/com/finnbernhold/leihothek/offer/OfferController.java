@@ -21,7 +21,7 @@ public class OfferController {
 
     @GetMapping("/newOffer")
     public String newOfferForm(Model model){
-        model.addAttribute("blankOffer", new Offer(null, null, null, null, null));
+        model.addAttribute("blankOffer", new Offer(null,null, null, null, null, null));
         return "addOffer";
     }
     @PostMapping("/newOffer")
@@ -44,7 +44,7 @@ public class OfferController {
             model.addAttribute("offers", allOffers);
         }else {
             model.addAttribute("query", query);
-            List<Offer> filteredOffers = offerService.getFilteredOffers(query);
+            List<Offer> filteredOffers = offerService.findOffersByTitle(query);
             model.addAttribute("count", filteredOffers.size());
             model.addAttribute("offers", filteredOffers);
         }
