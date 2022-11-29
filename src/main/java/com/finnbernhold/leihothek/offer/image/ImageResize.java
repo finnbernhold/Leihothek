@@ -21,9 +21,9 @@ public class ImageResize {
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Thumbnails.of(originalImage)
-                .size(350, 350)
+                .size(1000, 1000)
                 .outputFormat("JPEG")
-                .outputQuality(1)
+                .outputQuality(0.5)
                 .toOutputStream(outputStream);
 
         return outputStream.toByteArray();
