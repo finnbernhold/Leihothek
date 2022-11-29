@@ -10,13 +10,16 @@ import java.util.Optional;
 @Service
 public class ImageService {
     private final ImageRepository imageRepository;
+    private final ImageResize imageResize;
 
-    public ImageService(ImageRepository repository) {
+    public ImageService(ImageRepository repository, ImageResize imageResize) {
         this.imageRepository = repository;
+        this.imageResize = imageResize;
     }
 
     public Integer addImage(MultipartFile file) throws IOException {
-        Image img = new Image(null, file.getBytes(), file.getContentType());
+        byte[] resizedImage = imageResize.resizeImage(file.getBytes());
+        Image img = new Image(null, resizedImage, file.getContentType());
         img = imageRepository.save(img);
         return img.id();
     }

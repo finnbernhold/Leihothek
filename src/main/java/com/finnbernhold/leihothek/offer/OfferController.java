@@ -27,7 +27,7 @@ public class OfferController {
     @PostMapping("/newOffer")
     public String newOffer(@ModelAttribute Offer newOffer){
         offerService.addOffer(newOffer);
-        return "redirect:/";
+        return "redirect:/ownOffers";
     }
 
     @GetMapping("/offer/{id}")
