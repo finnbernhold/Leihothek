@@ -34,7 +34,7 @@
                 <div style="margin-right:30px; height:100%; display: inline-block;box-shadow: 5px 5px #ff914d;">
                     <a th:href="@{/offer/__${offer.id()}__}" style="text-decoration: none;">
                         <div class="offer card" style="overflow: hidden;">
-                            <img style="display: block;" th:src="@{/image/__${offer.imageId()}__}" class="card-img" alt="no image" onerror="this.src='http://localhost:8080/no-image.jpg'">
+                            <img style="display: block;" th:src="@{/image/__${offer.imageId()}__}" class="card-img" alt="no image" onerror="this.src='https://leihothek.herokuapp.com/no-image.jpg'">
                             <div class="card-body">
                                 <h1 class="card-title" style="font-size: 25px;color: black;" th:text = "${offer.title()}"></h1>
                             </div>
