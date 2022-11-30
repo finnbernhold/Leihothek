@@ -20,9 +20,13 @@ public class ImageController {
     private final ImageService imageService;
     private final OfferRepository offerRepository;
 
-    public ImageController(ImageService imageService, OfferRepository offerRepository) {
+    private final MakeImagesSmaller mis;
+
+
+    public ImageController(ImageService imageService, OfferRepository offerRepository, MakeImagesSmaller mis) {
         this.imageService = imageService;
         this.offerRepository = offerRepository;
+        this.mis = mis;
     }
 
     @GetMapping("/offer/{id}/image/upload")
@@ -43,5 +47,11 @@ public class ImageController {
     public ResponseEntity<byte[]> showImage(@PathVariable Integer id) {
         Image img = imageService.getImage(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Image not found"));
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(img.mimeType())).body(img.image());
+    }
+
+    @GetMapping("/mis")
+    public String mis() throws IOException {
+        mis.makeImagesSmaller(19);
+        return "redirect: /";
     }
 }

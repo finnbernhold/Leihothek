@@ -10,7 +10,6 @@ import org.springframework.data.jdbc.repository.config.EnableJdbcAuditing;
 @SpringBootApplication
 @EnableJdbcAuditing
 public class LeihothekApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(LeihothekApplication.class, args);
 	}
