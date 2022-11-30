@@ -2,15 +2,16 @@ package com.finnbernhold.leihothek.offer;
 
 
 import org.springframework.util.StringUtils;
-
 public enum Categories {
-    HANDWERK,
-    SPORT,
-    SPIELE,
-    ELEKTRONIK,
+    ELEKTRISCHE_GERÄTE,
+    MASCHINEN,
+    HAUS_UND_GARTEN,
+    LITERATUR,
+    SPIELE_SPORT_UND_FREIZEIT,
+    HELFENDE_HÄNDE,
     HAUSHALT;
 
-    public String displayText(){
-        return StringUtils.capitalize(super.toString().toLowerCase());
+    public String displayText() {
+        return StringUtils.capitalize(super.toString().toLowerCase().replace("_", " "));
     }
 }

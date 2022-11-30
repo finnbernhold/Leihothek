@@ -31,14 +31,20 @@ public class OfferService {
     public Iterable<Offer> findAllOwnOffers(Principal principal){
         return repo.findAllOffersOfUser(principal.getName());
     }
-    public Iterable<Offer> findAllOffersOfUser(String user){
+
+    public Iterable<Offer> findAllOffersOfUser(String user) {
         return repo.findAllOffersOfUser(user);
     }
 
-    public List<Offer> findOffersByTitle(String query){
+    public List<Offer> findOffersByTitle(String query) {
         return repo.findByTitleContainingIgnoreCase(query);
     }
-    public List<Offer> findOffersByTitleAndCategory(String category, String query){
+
+    public List<Offer> findOffersByTitleAndCategory(Categories category, String query) {
         return repo.findByTitleAndCategoryContainingIgnoreCase(category, query);
+    }
+
+    public List<Offer> findOffersByCategory(Categories category) {
+        return repo.findAllByCategory(category);
     }
 }

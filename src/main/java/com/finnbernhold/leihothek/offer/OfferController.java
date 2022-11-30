@@ -37,17 +37,33 @@ public class OfferController {
     }
 
     @GetMapping("/")
-    public String showAllOffers(Model model, @RequestParam(required = false) String query){
-        if (query == null){
-            Iterable<Offer> allOffers = offerService.findAllOffers();
-            model.addAttribute("count", IterableUtils.size(allOffers));
-            model.addAttribute("offers", allOffers);
-        }else {
-            model.addAttribute("query", query);
-            List<Offer> filteredOffers = offerService.findOffersByTitle(query);
-            model.addAttribute("count", filteredOffers.size());
-            model.addAttribute("offers", filteredOffers);
+    public String showAllOffers(Model model, @RequestParam(required = false) String query, @RequestParam(required = false) Categories category) {
+        System.out.println(category + query);
+        if (category == null) {
+            if (query == null) {
+                Iterable<Offer> allOffers = offerService.findAllOffers();
+                model.addAttribute("count", IterableUtils.size(allOffers));
+                model.addAttribute("offers", allOffers);
+            } else {
+                model.addAttribute("query", query);
+                List<Offer> filteredOffers = offerService.findOffersByTitle(query);
+                model.addAttribute("count", filteredOffers.size());
+                model.addAttribute("offers", filteredOffers);
+            }
+        } else {
+            if (query == null) {
+                Iterable<Offer> allOffers = offerService.findOffersByCategory(category);
+                model.addAttribute("count", IterableUtils.size(allOffers));
+                model.addAttribute("offers", allOffers);
+            } else {
+                model.addAttribute("query", query);
+                List<Offer> filteredOffers = offerService.findOffersByTitleAndCategory(category, query);
+                model.addAttribute("count", filteredOffers.size());
+                model.addAttribute("offers", filteredOffers);
+                model.addAttribute("selectedCategory", category);
+            }
         }
+
         return "start";
     }
 
