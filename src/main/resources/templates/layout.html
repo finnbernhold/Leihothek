@@ -25,11 +25,16 @@
 
             <ul class="navbar-nav text-right">
                 <form method="get" action="/">
-                    <!--                            <select class="form-control filter" name="fieldName">-->
-                    <!--                                <option>hallo</option>-->
-                    <!--                            </select>-->
                     <div class="input-group">
-                        <input placeholder="Angebot finden" class="form-control" style="" name="query" type="text" th:value="${query}" size="100">
+                        <select class="form-control filter" onchange="this.form.submit()" name="category"
+                                style="margin-right: 10px">
+                            <option>Alle</option>
+                            <option th:each="category : ${T(com.finnbernhold.leihothek.offer.Categories).values()}"
+                                    th:value="${category}" th:selected="${category == selectedCategory}"
+                                    th:text="${category.displayText()}"></option>
+                        </select>
+                        <input placeholder="Angebot finden" class="form-control" style="" name="query" type="text"
+                               th:value="${query}" size="100">
                         <button class="btn btn-primary input-group-addon" style="display:inline-block;" type="submit">
                             <i class="fas fa-search"></i>
                         </button>

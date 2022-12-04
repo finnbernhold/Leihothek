@@ -3,6 +3,7 @@ CREATE TABLE offer
     id                 SERIAL    PRIMARY KEY,
     title              TEXT      NOT NULL,
     description        TEXT      NOT NULL,
+    category           TEXT      NOT NULL,
     image_id           INTEGER,
     created_by         TEXT     NOT NULL
 );

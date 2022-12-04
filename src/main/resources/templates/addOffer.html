@@ -8,9 +8,12 @@
     <section layout:fragment="content">
         <form action="#" th:object="${blankOffer}" id="offer" method="post">
             <div class="form-group">
-                <p>Titel: <input class="form-control" type="text" required th:field="*{title}"></p>
-                <p>Beschreibung: <textarea class="form-control" rows="10" type="text" required th:field="*{description}"></textarea></p>
-                <input class="btn btn-primary" type="submit" onclick="upload()" value="Speichern">
+                <input class="form-control" type="text" required th:field="*{title}" placeholder="Titel">
+                <textarea class="form-control" rows="10" type="text" required th:field="*{description}" placeholder="Beschreibung"></textarea>
+                <select class="form-control" required th:field="*{category}">
+                    <option th:each="category : ${T(com.finnbernhold.leihothek.offer.Categories).values()}" th:value="${category}" th:text="${category.displayText()}"></option>
+                </select>
+                <input class="btn btn-primary" type="submit" value="Speichern">
             </div>
         </form>
     </section>

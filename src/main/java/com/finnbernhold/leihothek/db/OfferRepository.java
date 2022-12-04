@@ -1,5 +1,6 @@
 package com.finnbernhold.leihothek.db;
 
+import com.finnbernhold.leihothek.offer.Categories;
 import com.finnbernhold.leihothek.offer.Offer;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -13,7 +14,10 @@ public interface OfferRepository extends CrudRepository<Offer, Integer> {
     @Query("SELECT * from offer o where o.created_by =:userName ")
     List<Offer> findAllOffersOfUser(@Param("userName") String userName);
 
-    List<Offer> findByTitleContainingIgnoreCase(String title);
+    @Query("SELECT * from offer o where o.category like :category AND strpos(LOWER(title), LOWER(:query)) > 0")
+    List<Offer> findByTitleAndCategoryContainingIgnoreCase(Categories category, String query);
 
-    Integer countByTitle(String title);
+    List<Offer> findAllByCategory(Categories category);
+
+    List<Offer> findByTitleContainingIgnoreCase(String title);
 }
