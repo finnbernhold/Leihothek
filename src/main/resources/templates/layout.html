@@ -28,6 +28,7 @@
                     <div class="input-group">
                         <select class="form-control filter" onchange="this.form.submit()" name="category"
                                 style="margin-right: 10px">
+                            <option>Alle</option>
                             <option th:each="category : ${T(com.finnbernhold.leihothek.offer.Categories).values()}"
                                     th:value="${category}" th:selected="${category == selectedCategory}"
                                     th:text="${category.displayText()}"></option>

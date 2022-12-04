@@ -2,9 +2,11 @@ package com.finnbernhold.leihothek.offer;
 
 import com.finnbernhold.leihothek.offer.image.ImageService;
 import org.apache.commons.collections4.IterableUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.util.List;
@@ -37,9 +39,9 @@ public class OfferController {
     }
 
     @GetMapping("/")
-    public String showAllOffers(Model model, @RequestParam(required = false) String query, @RequestParam(required = false) Categories category) {
+    public String showAllOffers(Model model, @RequestParam(required = false) String query, @RequestParam(required = false) String category) {
         System.out.println(category + query);
-        if (category == null) {
+        if (category == null || category.equals("Alle")) {
             if (query == null) {
                 Iterable<Offer> allOffers = offerService.findAllOffers();
                 model.addAttribute("count", IterableUtils.size(allOffers));
@@ -51,16 +53,23 @@ public class OfferController {
                 model.addAttribute("offers", filteredOffers);
             }
         } else {
-            if (query == null) {
-                Iterable<Offer> allOffers = offerService.findOffersByCategory(category);
-                model.addAttribute("count", IterableUtils.size(allOffers));
-                model.addAttribute("offers", allOffers);
-            } else {
-                model.addAttribute("query", query);
-                List<Offer> filteredOffers = offerService.findOffersByTitleAndCategory(category, query);
-                model.addAttribute("count", filteredOffers.size());
-                model.addAttribute("offers", filteredOffers);
-                model.addAttribute("selectedCategory", category);
+            try {
+                Categories categoryEnum = Categories.valueOf(category);
+                if (query == null) {
+                    Iterable<Offer> allOffers = offerService.findOffersByCategory(categoryEnum);
+                    model.addAttribute("count", IterableUtils.size(allOffers));
+                    model.addAttribute("offers", allOffers);
+                } else {
+                    model.addAttribute("query", query);
+                    List<Offer> filteredOffers = offerService.findOffersByTitleAndCategory(categoryEnum, query);
+                    model.addAttribute("count", filteredOffers.size());
+                    model.addAttribute("offers", filteredOffers);
+                    model.addAttribute("selectedCategory", categoryEnum);
+                }
+
+            } catch (Exception e) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Keine Kategorie");
+
             }
         }
 
