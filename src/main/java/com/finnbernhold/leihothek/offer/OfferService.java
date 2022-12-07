@@ -47,4 +47,8 @@ public class OfferService {
     public List<Offer> findOffersByCategory(Categories category) {
         return repo.findAllByCategory(category);
     }
+
+    public void saveEditedOffer(Offer editedOffer) {
+        repo.save(editedOffer);
+    }
 }

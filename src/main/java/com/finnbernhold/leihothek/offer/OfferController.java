@@ -88,9 +88,9 @@ public class OfferController {
     }
 
     @PostMapping("/offer/{id}/delete")
-    public String deleteOffer(@PathVariable Integer id){
+    public String deleteOffer(@PathVariable Integer id) {
         Offer offer = offerService.findOfferById(id);
-        if(offer.imageId() != null){
+        if (offer.imageId() != null) {
             imageService.deleteById(offerService.findOfferById(id).imageId());
 
         }
@@ -98,5 +98,15 @@ public class OfferController {
         return "redirect:/ownOffers";
     }
 
+    @GetMapping("offer/{id}/edit")
+    public String editOfferForm(Model model, @PathVariable Integer id) {
+        model.addAttribute("editOffer", offerService.findOfferById(id));
+        return "editOffer";
+    }
 
+    @PostMapping("offer/{id}/edit")
+    public String editOffer(@ModelAttribute Offer editedOffer) {
+        offerService.saveEditedOffer(editedOffer);
+        return "redirect:/ownOffers";
+    }
 }

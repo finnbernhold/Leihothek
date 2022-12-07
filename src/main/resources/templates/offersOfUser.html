@@ -29,17 +29,28 @@
                         <div class="offer card" style="overflow: hidden;">
                             <img style="display: block;" th:src="@{/image/__${offer.imageId()}__}" onerror="this.src='http://localhost:8080/no-image.jpg'" class="card-img" alt="no image">
                             <div class="card-body">
-                                <h1 class="card-title" style="font-size: 25px;color: black;" th:text = "${offer.title()}"></h1>
-                                <hr>
-                                <div class="input-group">
+                                <h1 class="card-title" style="font-size: 25px;color: black;"
+                                    th:text="${offer.title()}"></h1>
+                                <hr th:if="${#authentication.getName() == offer.createdBy() || #authorization.expression('hasAuthority(''ADMIN'')')}">
+                                <div class="input-group justify-content-center">
                                     <form method="post" th:action="@{/offer/__${offer.id()}__/delete}">
-                                        <button class="btn" th:if="${#authentication.getName() == offer.createdBy() || #authorization.expression('hasAuthority(''ADMIN'')')}" onclick="return confirm('Willst du dieses Angebot wirklich löschen?')" type="submit">
+                                        <button class="btn"
+                                                th:if="${#authentication.getName() == offer.createdBy() || #authorization.expression('hasAuthority(''ADMIN'')')}"
+                                                onclick="return confirm('Willst du dieses Angebot wirklich löschen?')"
+                                                type="submit">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>
                                     <form method="get" th:action="@{/offer/__${offer.id()}__/image/upload}">
-                                        <button class="btn"  th:if="${#authentication.getName() == offer.createdBy()}" type="submit">
+                                        <button class="btn" th:if="${#authentication.getName() == offer.createdBy()}"
+                                                type="submit">
                                             <i class="fa fa-image"></i>
+                                        </button>
+                                    </form>
+                                    <form method="get" th:action="@{/offer/__${offer.id()}__/edit}">
+                                        <button class="btn" th:if="${#authentication.getName() == offer.createdBy()}"
+                                                type="submit">
+                                            <i class="fa fa-pencil"></i>
                                         </button>
                                     </form>
                                 </div>

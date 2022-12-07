@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Anzeige hinzufügen</title>
+</head>
+<body>
+<section layout:fragment="content">
+  <form action="#" th:object="${editOffer}" id="offer" method="post">
+    <div class="form-group">
+      <input class="form-control" type="text" required th:field="*{title}" placeholder="Titel">
+      <textarea class="form-control" rows="10" type="text" required th:field="*{description}"
+                placeholder="Beschreibung"></textarea>
+      <select class="form-control" required th:field="*{category}">
+        <option th:each="category : ${T(com.finnbernhold.leihothek.offer.Categories).values()}" th:value="${category}"
+                th:text="${category.displayText()}"></option>
+      </select>
+      <input class="btn btn-primary" type="submit" value="Speichern">
+    </div>
+
+    <input type="hidden" th:field="*{createdBy}">
+  </form>
+</section>
+</body>
+</html>
