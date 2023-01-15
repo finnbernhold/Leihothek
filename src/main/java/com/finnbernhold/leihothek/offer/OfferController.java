@@ -22,12 +22,15 @@ public class OfferController {
     }
 
     @GetMapping("/newOffer")
-    public String newOfferForm(Model model){
-        model.addAttribute("blankOffer", new Offer(null,null, null, null, null, null));
+    public String newOfferForm(Model model) {
+        model.addAttribute("blankOffer", new Offer(null, null, null, null, null, null, null));
         return "addOffer";
     }
+
     @PostMapping("/newOffer")
-    public String newOffer(@ModelAttribute Offer newOffer){
+    public String newOffer(@ModelAttribute Offer newOffer, Model model) {
+        String message = "angebot hochgeladen";
+        model.addAttribute("toastMessage", message);
         offerService.addOffer(newOffer);
         return "redirect:/ownOffers";
     }
@@ -40,7 +43,6 @@ public class OfferController {
 
     @GetMapping("/")
     public String showAllOffers(Model model, @RequestParam(required = false) String query, @RequestParam(required = false) String category) {
-        System.out.println(category + query);
         if (category == null || category.equals("Alle")) {
             if (query == null) {
                 Iterable<Offer> allOffers = offerService.findAllOffers();
@@ -108,5 +110,11 @@ public class OfferController {
     public String editOffer(@ModelAttribute Offer editedOffer) {
         offerService.saveEditedOffer(editedOffer);
         return "redirect:/ownOffers";
+    }
+
+    @PostMapping("/offer/{id}/message")
+    public String sendMessage(@PathVariable Integer id, @RequestParam String message, @RequestParam String contactData) {
+        offerService.sendEmail(offerService.findOfferById(id), message, contactData);
+        return "redirect:/offer/" + id;
     }
 }

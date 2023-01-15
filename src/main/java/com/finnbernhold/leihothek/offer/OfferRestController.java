@@ -15,7 +15,7 @@ public class OfferRestController {
 
     @PostMapping("/api/add")
     public String addOffer(@RequestParam String title, @RequestParam String description){
-        offerService.addOffer(new Offer(null, title, description, null, null, null));
+        offerService.addOffer(new Offer(null, title, description, null, null, null, null));
         return "saved book";
     }
     @GetMapping("/api/offer/{id}")

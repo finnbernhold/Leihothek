@@ -1,7 +1,9 @@
 package com.finnbernhold.leihothek.offer;
 
 import com.finnbernhold.leihothek.db.OfferRepository;
+import com.finnbernhold.leihothek.mail.EmailServiceImpl;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -11,24 +13,30 @@ import java.util.List;
 @Service
 public class OfferService {
     private final OfferRepository repo;
-    public OfferService(OfferRepository repo) {
+    private final EmailServiceImpl emailService;
+
+    public OfferService(OfferRepository repo, EmailServiceImpl emailService) {
         this.repo = repo;
+        this.emailService = emailService;
     }
 
-    public void addOffer(Offer offer){
+    public void addOffer(Offer offer) {
         repo.save(offer);
     }
-    public Offer findOfferById(Integer id){
+
+    public Offer findOfferById(Integer id) {
         return repo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Offer not found"));
     }
-    public Iterable<Offer> findAllOffers(){
+
+    public Iterable<Offer> findAllOffers() {
         return repo.findAllByOrderByIdAsc();
     }
-    public void deleteById(Integer id){
+
+    public void deleteById(Integer id) {
         repo.deleteById(id);
     }
 
-    public Iterable<Offer> findAllOwnOffers(Principal principal){
+    public Iterable<Offer> findAllOwnOffers(Principal principal) {
         return repo.findAllOffersOfUser(principal.getName());
     }
 
@@ -50,5 +58,11 @@ public class OfferService {
 
     public void saveEditedOffer(Offer editedOffer) {
         repo.save(editedOffer);
+    }
+
+    public void sendEmail(Offer offer, String message, String contactData) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        emailService.sendMessage(offer, username, message, contactData);
+
     }
 }

@@ -12,6 +12,7 @@ public record Offer(
         Categories category,
         Integer imageId,
         @CreatedBy
-        String createdBy
+        String createdBy,
+        String contact_email
 ){
 }
