@@ -34,7 +34,7 @@ public class ImageController {
     public String addImageToBike(@RequestParam("image") MultipartFile image, @PathVariable Integer id) throws IOException {
         Integer imageId = imageService.addImage(image);
         Offer offer = offerRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Offer not found"));
-        Offer updatedOffer = new Offer(offer.id(), offer.title(), offer.description(), offer.category(), imageId, offer.createdBy());
+        Offer updatedOffer = new Offer(offer.id(), offer.title(), offer.description(), offer.category(), imageId, offer.createdBy(), offer.contact_email());
         offerRepository.save(updatedOffer);
         return "redirect:/";
     }

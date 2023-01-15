@@ -30,7 +30,7 @@ public class UserController {
 
     @GetMapping("/admin/users")
     public String listAllUsers(Model model) {
-        List<SimpleUser> simpleUsers = template.query("SELECT users.username, authority FROM users JOIN authorities on users.username = authorities.username ORDER BY users.username ASC",
+        List<SimpleUser> simpleUsers = template.query("SELECT users.username, authority FROM users JOIN authorities on users.username = authorities.username ORDER BY users.username",
                 (rs, rowNum) -> {
                     var username = rs.getString("username");
                     var authority = rs.getString("authority");
@@ -64,12 +64,25 @@ public class UserController {
     }
 
     @PostMapping("/changePassword")
-    public String changePassword(@RequestParam String newPassword1, @RequestParam String newPassword2, @RequestParam String oldPassword){
-        if (Objects.equals(newPassword1, newPassword2)){
+    public String changePassword(@RequestParam String newPassword1, @RequestParam String newPassword2, @RequestParam String oldPassword) {
+        if (Objects.equals(newPassword1, newPassword2)) {
             userDetailsManager.changePassword(oldPassword, passwordEncoder.encode(newPassword1));
             return "redirect:/";
-        }else {
+        } else {
             return "redirect:/changePassword";
         }
+    }
+
+    @GetMapping("/admin/users/{userName}/edit")
+    public String editUserForm(@PathVariable String userName, Model model) {
+        model.addAttribute("editUser", userDetailsManager.loadUserByUsername(userName));
+        return "editUser";
+    }
+
+    @PostMapping("/admin/users/{userName}/edit")
+    public String editUser(@PathVariable String userName, @RequestParam String password, @RequestParam String authority) {
+        System.out.println(new User(userName, password, AuthorityUtils.createAuthorityList(authority)));
+        userDetailsManager.updateUser(new User(userName, password, AuthorityUtils.createAuthorityList(authority)));
+        return "redirect:/";
     }
 }

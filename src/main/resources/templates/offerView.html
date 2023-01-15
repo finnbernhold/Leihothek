@@ -17,9 +17,8 @@
     <section layout:fragment="content">
         <div class="col-md-8" style= "margin: auto; border: 1px solid; padding: 10px; box-shadow: 5px 10px #ff914d;">
             <div class="d-flex justify-content-center">
-                <button class="btn">
-                    <img class="col-12 rounded mx-auto d-block" style="margin-top: 50px;" alt="sample" onerror="this.src='http://localhost:8080/no-image.jpg'" th:src="${'/image/' + offer.imageId()}" data-bs-toggle="modal" data-target=".bd-example-modal-lg" data-bs-target="#imageModal" th:data-bs-image-url="${'/image/' + offer.imageId()}"/>
-                </button>
+                <img class="col-12 rounded mx-auto d-block" style="margin-top: 50px;" alt="sample"
+                     onerror="this.src='http://localhost:8080/no-image.jpg'" th:src="${'/image/' + offer.imageId()}"/>
             </div>
             <h1 style="text-align: center; margin-top:20px" th:text="${offer.title()}"></h1>
             <h3 style="margin: 50px 0 0 20px">Beschreibung</h3>
@@ -28,41 +27,46 @@
                 <p th:text="${offer.description()}" style="margin: 25px 0 0 20px;" class="force-line-break"></p>
             </pre>
             <hr>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sendMessageModal">
+                <i class="fa fa-comment" style="transform: scaleX(-1);"></i> Nachricht schreiben
+            </button>
             <div>
                 Angebot von <a th:href="@{/user/__${offer.createdBy()}__}" th:text="${offer.createdBy()}">user</a>
             </div>
-            <p th:text="${offer.category().displayText()}"></p>
         </div>
 
 
-        <div class="modal fade bd-example-modal-lg" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal fade" id="sendMessageModal" tabindex="-1" role="dialog"
+             aria-labelledby="sendMessageModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
+                        <h5 class="modal-title" id="sendMessageModalLabel">Send a Message</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <img class="modalImage rounded mx-auto d-block w-100" alt="no image" src="">
+                    <form th:action="@{/offer/__${offer.id()}__/message}" method="post">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">Message:</label>
+                                <textarea class="form-control" id="message-text" name="message" rows="10"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">Kontaktdaten:</label>
+                                <input type="text" class="form-control" id="contact-text"
+                                       placeholder="Email, Telefon..." name="contactData">
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                            <button type="submit" class="btn btn-primary" id="sendMessageButton">Send Message</button>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>
+
         <script>
-
-            const imageModal = document.getElementById('imageModal');
-            imageModal.addEventListener('show.bs.modal', function (event) {
-                const button = event.relatedTarget;
-                const imageUrl = button.getAttribute('data-bs-image-url');
-                const modalImage = imageModal.querySelector('.modalImage');
-
-                modalImage.src = imageUrl;
-            })
         </script>
     </section>
 </body>
