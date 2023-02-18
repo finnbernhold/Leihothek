@@ -13,6 +13,6 @@ public record Offer(
         Integer imageId,
         @CreatedBy
         String createdBy,
-        String contact_email
+        String contactEmail
 ){
 }
