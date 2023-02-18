@@ -30,7 +30,7 @@ public class EmailServiceImpl {
     public void sendMessage(Offer offer, String username, String message, String contactData) {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
-        String to = offer.contact_email();
+        String to = offer.contactEmail();
         Context context = new Context();
         context.setVariable("message", message);
         context.setVariable("contactData", contactData);
@@ -40,6 +40,5 @@ public class EmailServiceImpl {
         helper.setTo(to);
         helper.setSubject(subject);
         emailSender.send(mimeMessage);
-        System.out.printf("send email to " + to);
     }
 }

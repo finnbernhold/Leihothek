@@ -6,8 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
@@ -21,22 +23,19 @@ public class OfferController {
         this.imageService = imageService;
     }
 
-    @GetMapping("/newOffer")
-    public String newOfferForm(Model model) {
-        model.addAttribute("blankOffer", new Offer(null, null, null, null, null, null, null));
+    @GetMapping("/new-offer")
+    public String newOfferForm() {
         return "addOffer";
     }
 
-    @PostMapping("/newOffer")
-    public String newOffer(@ModelAttribute Offer newOffer, Model model) {
-        String message = "angebot hochgeladen";
-        model.addAttribute("toastMessage", message);
-        offerService.addOffer(newOffer);
+    @PostMapping("/new-offer")
+    public String newOffer(@RequestParam String title, @RequestParam String description, @RequestParam String category, @RequestParam String email, @RequestParam(required = false) MultipartFile image) throws IOException {
+        offerService.addOffer(title, description, category, email, image);
         return "redirect:/ownOffers";
     }
 
     @GetMapping("/offer/{id}")
-    public String showOfferForm(@PathVariable Integer id, Model model){
+    public String showOfferForm(@PathVariable Integer id, Model model) {
         model.addAttribute("offer", offerService.findOfferById(id));
         return "offerView";
     }
