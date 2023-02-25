@@ -28,6 +28,11 @@ public class UserController {
         this.template = template;
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
     @GetMapping("/admin/users")
     public String listAllUsers(Model model) {
         List<SimpleUser> simpleUsers = template.query("SELECT users.username, authority FROM users JOIN authorities on users.username = authorities.username ORDER BY users.username",

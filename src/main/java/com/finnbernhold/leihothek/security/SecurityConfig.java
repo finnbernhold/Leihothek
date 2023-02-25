@@ -20,10 +20,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.csrf().disable()
                 .formLogin()
+                .loginPage("/login")
+                .permitAll()
                 .and()
-                .httpBasic()
-                .and()
-                .authorizeRequests().antMatchers("/admin/**").hasAuthority("ADMIN")
+                .authorizeRequests().antMatchers("/admin/**").hasAuthority("ADMIN").antMatchers("/k27-logo.png").permitAll().antMatchers("/background.jpg").permitAll()
                 .anyRequest().authenticated();
         return http.build();
     }
