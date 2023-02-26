@@ -16,8 +16,9 @@
         <form action="/new-offer" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="image">Bild hochladen:</label> <br>
-                <input type="file" id="image" name="image" accept="image/*" required onchange="loadFile(event)">
-                <img class="col-12 rounded mx-auto d-block" style="display: none" id="output"/>
+                <input type="file" id="image" name="image" class="form-control" accept="image/*" required
+                       onchange="loadFile(event)">
+                <img src="http://localhost:8080/no-image.jpg" class="col-12 rounded mx-auto d-block" id="output"/>
             </div>
             <div class="form-group">
                 <label for="title">Angebotstitel:</label>
