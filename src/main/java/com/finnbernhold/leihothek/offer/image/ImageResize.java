@@ -1,7 +1,6 @@
 package com.finnbernhold.leihothek.offer.image;
 
 
-
 import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +20,7 @@ public class ImageResize {
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Thumbnails.of(originalImage)
-                .size(1000, 1000)
+                .size(originalImage.getWidth(), originalImage.getHeight())
                 .outputFormat("JPEG")
                 .outputQuality(0.5)
                 .toOutputStream(outputStream);
