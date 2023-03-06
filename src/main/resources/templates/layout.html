@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="de" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -30,35 +30,37 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse container" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <form method="get" action="/">
+                        <div class="input-group">
+                            <select class="form-control filter" onchange="this.form.submit()" name="category"
+                                    style="margin-right: 10px">
+                                <option>Alle</option>
+                                <option th:each="category : ${T(com.finnbernhold.leihothek.offer.Categories).values()}"
+                                        th:value="${category}" th:selected="${category == selectedCategory}"
+                                        th:text="${category.displayText()}"></option>
+                            </select>
+                            <input placeholder="Angebot finden" class="form-control" style="" name="query" type="text"
+                                   th:value="${query}" size="100">
+                            <button class="btn btn-primary input-group-addon" style="display:inline-block;"
+                                    type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
 
-                </ul>
-            </div>
-
-            <ul class="navbar-nav text-right">
-                <form method="get" action="/">
-                    <div class="input-group">
-                        <select class="form-control filter" onchange="this.form.submit()" name="category"
-                                style="margin-right: 10px">
-                            <option>Alle</option>
-                            <option th:each="category : ${T(com.finnbernhold.leihothek.offer.Categories).values()}"
-                                    th:value="${category}" th:selected="${category == selectedCategory}"
-                                    th:text="${category.displayText()}"></option>
-                        </select>
-                        <input placeholder="Angebot finden" class="form-control" style="" name="query" type="text"
-                               th:value="${query}" size="100">
-                        <button class="btn btn-primary input-group-addon" style="display:inline-block;" type="submit">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </form>
-                <li class="nav-item">
+                    </form>
                     <div class="dropdown" style="margin-left: 100px;">
                         <button class="btn btn-primary dropdown-toggle fa fa-user" style="font-size: 30px" type="button"
                                 id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></button>
                         <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton1">
-                            <li><h3 style="text-align: center"><div sec:authentication="name"></div></h3></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <h3 style="text-align: center">
+                                    <div sec:authentication="name"></div>
+                                </h3>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li sec:authorize="hasAuthority('ADMIN')">
                                 <form method="get" action="/admin/users/add">
                                     <input type="submit" class="dropdown-item" value="Benutzer hinzufügen">
@@ -92,6 +94,12 @@
                             </li>
                         </ul>
                     </div>
+                </ul>
+            </div>
+
+            <ul class="navbar-nav text-right">
+
+                <li class="nav-item">
                 </li>
             </ul>
         </div>
@@ -99,20 +107,6 @@
     </nav>
     <section class="container" style="margin-top: 75px" layout:fragment="content">
     </section>
-    <p th:text="${toastMessage}"></p>
-    <div th:if="${toastMessage} != null" class="position-fixed top-0 end-0 p-3" style="z-index: 11">
-        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <img src="..." class="rounded me-2" alt="...">
-                <strong class="me-auto">Bootstrap</strong>
-                <small>11 mins ago</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                Hello, world! This is a toast message.
-            </div>
-        </div>
-    </div>
     <script>
         $(document).ready(function () {
             if ()
