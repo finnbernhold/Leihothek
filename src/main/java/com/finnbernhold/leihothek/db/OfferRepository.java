@@ -9,7 +9,10 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface OfferRepository extends CrudRepository<Offer, Integer> {
-    List<Offer> findAllByOrderByIdAsc();
+//    @Query("SELECT o FROM offer o ORDER BY o.id DESC ")
+//    List<Offer> findOffers(Pageable pageable);
+
+    List<Offer> findTop21ByOrderByIdDesc();
 
     @Query("SELECT * from offer o where o.created_by =:userName ")
     List<Offer> findAllOffersOfUser(@Param("userName") String userName);

@@ -24,7 +24,7 @@
 <body>
     <nav class="navbar fixed-top navbar-light bg-light navbar-expand-sm shadow-lg p-3 mb-5 rounded">
         <div class="container-fluid">
-            <a class="navbar-brand" href="https://www.k27.info/" target="_blank">K27</a>
+            <a class="navbar-brand" href="#exampleModal" data-toggle="modal" data-target="#exampleModal">K27</a>
             <a class="navbar-brand" style="margin-left:25px" href="/">Leihothek</a>
             <button class="navbar-toggler text-left" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -33,7 +33,7 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <form method="get" action="/">
                         <div class="input-group">
-                            <select class="form-control filter" onchange="this.form.submit()" name="category"
+                            <select class="form-select filter" onchange="this.form.submit()" name="category"
                                     style="margin-right: 10px">
                                 <option>Alle</option>
                                 <option th:each="category : ${T(com.finnbernhold.leihothek.offer.Categories).values()}"
@@ -107,12 +107,34 @@
     </nav>
     <section class="container" style="margin-top: 75px" layout:fragment="content">
     </section>
-    <script>
-        $(document).ready(function () {
-            if ()
-                $('.toast').toast('show');
-        });
-    </script>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Die k27 Genossenschaft</h5>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Ziel der K27 Genossenschaft für solidarische Lebensräume eG ist es, Räume für ein nachhaltiges
+                        sowie solidarisches Miteinander bereit zu stellen.
+                        Dies sind einerseits reale physikalische Räume wie zum Beispiel eine Gemeinschaftswerkstatt oder
+                        ein Wohnprojekt.
+                        Andererseits sind es auch virtuelle Räume wie diese Leih-o-thek.
+                        Wenn Du mehr über uns erfahren möchtest und Lust hast, Zukunft mitzugestalten, schau gerne bei
+                        uns vorbei:
+                        <a href="https://k27.info">www.k27.info</a>
+
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">schließen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>

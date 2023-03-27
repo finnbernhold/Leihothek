@@ -10,7 +10,8 @@ public enum Categories {
     SPIELE_0SPORT_UND_0FREIZEIT,
     HELFENDE_0HÄNDE,
     HAUSHALT,
-    SONSTIGES;
+    SONSTIGES,
+    ZU_VERSCHENKEN;
 
     public String displayText() {
         return capitalizeString(StringUtils.capitalize(super.toString().toLowerCase().replace("_", " ")));

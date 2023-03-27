@@ -35,8 +35,8 @@ public class OfferService {
         return repo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Offer not found"));
     }
 
-    public Iterable<Offer> findAllOffers() {
-        return repo.findAllByOrderByIdAsc();
+    public Iterable<Offer> findOffers() {
+        return repo.findTop21ByOrderByIdDesc();
     }
 
     public void deleteById(Integer id) {
