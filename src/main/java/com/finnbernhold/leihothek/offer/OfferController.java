@@ -44,8 +44,8 @@ public class OfferController {
     public String showAllOffers(Model model, @RequestParam(required = false) String query, @RequestParam(required = false) String category) {
         if (category == null || category.equals("Alle")) {
             if (query == null) {
-                Iterable<Offer> allOffers = offerService.findAllOffers();
-                model.addAttribute("count", IterableUtils.size(allOffers));
+                Iterable<Offer> allOffers = offerService.findOffers();
+                model.addAttribute("count", IterableUtils.size(offerService.findOffers()));
                 model.addAttribute("offers", allOffers);
             } else {
                 model.addAttribute("query", query);

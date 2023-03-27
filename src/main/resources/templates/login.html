@@ -54,21 +54,41 @@
       justify-content: center;
       align-items: center;
     }
-  </style>
+
+
+    </style>
 </head>
 <body style="background-image: url(http://localhost:8080/background.jpg); background-repeat: no-repeat; background-size: cover;">
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <img src="http://localhost:8080/k27-logo.png" class="img-fluid" alt="K27 Logo">
+    <div class="text-center">
+        <p>
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample">
+                Infos zu der Leihothek
+            </button>
+        </p>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <p>Mit dieser Leih-o-thek möchte unsere Genossenschaft einen Beitrag zur nachhaltigen Nutzung von
+                    Ressourcen leisten. Für die Nutzung ist eine Anmeldung notwendig. Wenn Du Mitglied unserer
+                    Genossenschaft bist und die Leih-o-thek nutzen möchtest, schreibe bitte eine kurze Email an <a
+                            href="mailto:team@k27.info">team@k27.info</a> und wir richten Dir einen Zugang ein. Wenn Du
+                    noch kein Mitglied unserer Genossenschaft bist, erfährst Du <a href="https://k27.info">hier</a> mehr
+                    über unsere Ziele und Ideen. Vielleicht hast Du ja Lust mitzumachen!?</p>
+            </div>
+        </div>
     </div>
-  </div>
-  <form th:action="@{/login}" method="post">
-    <div th:if="${param.error}" class="alert alert-error">
-      Passwort oder Benutzername falsch
+    <div class="row">
+        <div class="col-md-12">
+            <img src="http://localhost:8080/k27-logo.png" class="img-fluid" alt="K27 Logo">
+        </div>
     </div>
-    <div class="form-group">
-        <label for="username">Benutzername</label>
+    <form th:action="@{/login}" method="post">
+        <div th:if="${param.error}" class="alert alert-error">
+            Passwort oder Benutzername falsch
+        </div>
+        <div class="form-group">
+            <label for="username">Benutzername</label>
       <input type="text" class="form-control" name="username" id="username" placeholder="Benutzername">
     </div>
     <div class="form-group">
