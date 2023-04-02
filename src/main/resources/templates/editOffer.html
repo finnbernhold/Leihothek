@@ -9,14 +9,20 @@
 <section layout:fragment="content">
     <form action="#" th:object="${editOffer}" id="offer" method="post">
         <div class="form-group">
-            <input class="form-control" type="text" required th:field="*{title}" placeholder="Titel">
+            <label for="title">Angebotstitel:</label>
+            <input id="title" class="form-control" type="text" required th:field="*{title}" placeholder="Titel">
+            <label id="description" for="description">Angebotsbeschreibung:</label>
             <textarea class="form-control" rows="10" type="text" required th:field="*{description}"
                       placeholder="Beschreibung"></textarea>
-            <select class="form-control" required th:field="*{category}">
+            <label for="category">Kategorie auswählen:</label>
+            <select id="category" class="form-control" required th:field="*{category}">
                 <option th:each="category : ${T(com.finnbernhold.leihothek.offer.Categories).values()}"
                         th:value="${category}"
                         th:text="${category.displayText()}"></option>
             </select>
+            <label for="email">Emailadresse angeben:</label>
+            <input type="email" th:field="*{contactEmail}" id="email" class="form-control" placeholder="Email Adresse"
+                   required name="email">
             <input class="btn btn-primary" type="submit" value="Speichern">
         </div>
 
