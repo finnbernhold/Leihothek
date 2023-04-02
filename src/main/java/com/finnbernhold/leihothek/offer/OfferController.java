@@ -5,7 +5,10 @@ import org.apache.commons.collections4.IterableUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -106,8 +109,9 @@ public class OfferController {
     }
 
     @PostMapping("offer/{id}/edit")
-    public String editOffer(@ModelAttribute Offer editedOffer) {
-        offerService.saveEditedOffer(editedOffer);
+    public String editOffer(@RequestParam String title, @RequestParam String description, @RequestParam String category, @RequestParam String contactEmail, @RequestParam(required = false) MultipartFile image, @RequestParam String createdBy, @RequestParam int id, @RequestParam int imageId) throws IOException {
+        System.out.println(contactEmail);
+        offerService.saveEditedOffer(title, description, category, contactEmail, image, createdBy, id, imageId);
         return "redirect:/ownOffers";
     }
 

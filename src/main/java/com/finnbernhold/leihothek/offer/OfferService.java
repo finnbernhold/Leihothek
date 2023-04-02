@@ -63,8 +63,12 @@ public class OfferService {
         return repo.findAllByCategory(category);
     }
 
-    public void saveEditedOffer(Offer editedOffer) {
-        repo.save(editedOffer);
+    public void saveEditedOffer(String title, String description, String categoryString, String email, MultipartFile image, String createdBy, int oldOfferId, int oldImageId) throws IOException {
+        Categories category = Categories.valueOf(categoryString);
+        imageService.deleteById(oldImageId);
+        Integer imageId = imageService.addImage(image);
+        repo.save(new Offer(oldOfferId, title, description, category, imageId, createdBy, email));
+
     }
 
     public void sendEmail(Offer offer, String message, String contactData) {
