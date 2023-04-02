@@ -110,7 +110,6 @@ public class OfferController {
 
     @PostMapping("offer/{id}/edit")
     public String editOffer(@RequestParam String title, @RequestParam String description, @RequestParam String category, @RequestParam String contactEmail, @RequestParam(required = false) MultipartFile image, @RequestParam String createdBy, @RequestParam int id, @RequestParam int imageId) throws IOException {
-        System.out.println(contactEmail);
         offerService.saveEditedOffer(title, description, category, contactEmail, image, createdBy, id, imageId);
         return "redirect:/ownOffers";
     }

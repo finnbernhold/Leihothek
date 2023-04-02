@@ -54,12 +54,6 @@
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>
-                                    <form method="get" th:action="@{/offer/__${offer.id()}__/image/upload}">
-                                        <button class="btn" th:if="${#authentication.getName() == offer.createdBy()}"
-                                                type="submit">
-                                            <i class="fa fa-image"></i>
-                                        </button>
-                                    </form>
                                     <form method="get" th:action="@{/offer/__${offer.id()}__/edit}">
                                         <button class="btn" th:if="${#authentication.getName() == offer.createdBy()}"
                                                 type="submit">

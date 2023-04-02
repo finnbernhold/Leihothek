@@ -16,14 +16,6 @@ public class ImageController {
         this.imageService = imageService;
     }
 
-    @GetMapping("/offer/{id}/image/upload")
-    public String addImageToBikeGet() {
-        return "ImageUpload";
-    }
-
-//    @PostMapping("/offer/{id}/image/upload")
-//    public String addImageToBike(@RequestParam("image") MultipartFile image, @PathVariable Integer id) throws IOException {
-//    }
 
     @GetMapping("/image/{id}")
     public ResponseEntity<byte[]> showImage(@PathVariable Integer id) {
