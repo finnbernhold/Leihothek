@@ -4,15 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Anzeige hinzufügen</title>
+    <style>
+        img {
+            width: auto;
+            height: 200px;
+            object-fit: scale-down;
+        }
+    </style>
 </head>
 <body>
 <section layout:fragment="content">
-    <form action="#" th:object="${editOffer}" id="offer" method="post">
+    <form action="#" th:object="${editOffer}" id="offer" method="post" enctype="multipart/form-data">
         <div class="form-group">
+            <label for="image">Bild hochladen:</label>
+            <input type="file" id="image" name="image" class="form-control" accept="image/*" required
+                   onchange="loadFile(event)">
+            <img th:src="@{/image/__*{imageId}__}" class="col-12 rounded mx-auto d-block" id="output"/>
             <label for="title">Angebotstitel:</label>
             <input id="title" class="form-control" type="text" required th:field="*{title}" placeholder="Titel">
-            <label id="description" for="description">Angebotsbeschreibung:</label>
-            <textarea class="form-control" rows="10" type="text" required th:field="*{description}"
+            <label for="description">Angebotsbeschreibung:</label>
+            <textarea class="form-control" id="description" rows="10" type="text" required th:field="*{description}"
                       placeholder="Beschreibung"></textarea>
             <label for="category">Kategorie auswählen:</label>
             <select id="category" class="form-control" required th:field="*{category}">
@@ -22,12 +33,21 @@
             </select>
             <label for="email">Emailadresse angeben:</label>
             <input type="email" th:field="*{contactEmail}" id="email" class="form-control" placeholder="Email Adresse"
-                   required name="email">
-            <input class="btn btn-primary" type="submit" value="Speichern">
+                   required name="contactEmail">
         </div>
+        <button type="submit" class="btn btn-primary">Angebot hochladen</button>
 
-        <input type="hidden" th:field="*{createdBy}">
+        <input type="hidden" name="createdBy" th:field="*{createdBy}">
+        <input type="hidden" name="id" th:field="*{id}">
+        <input type="hidden" name="imageId" th:field="*{imageId}">
     </form>
+    <script>
+        var loadFile = function (event) {
+            var output = document.getElementById('output');
+            output.style.display = "block";
+            output.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
 </section>
 </body>
 </html>
