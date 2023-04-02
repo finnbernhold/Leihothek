@@ -52,7 +52,7 @@ public class OfferService {
     }
 
     public List<Offer> findOffersByTitle(String query) {
-        return repo.findByTitleContainingIgnoreCase(query);
+        return repo.findByTitleContainingIgnoreCaseOrderByIdDesc(query);
     }
 
     public List<Offer> findOffersByTitleAndCategory(Categories category, String query) {
@@ -60,7 +60,7 @@ public class OfferService {
     }
 
     public List<Offer> findOffersByCategory(Categories category) {
-        return repo.findAllByCategory(category);
+        return repo.findAllByCategoryOrderByIdDesc(category);
     }
 
     public void saveEditedOffer(String title, String description, String categoryString, String email, MultipartFile image, String createdBy, int oldOfferId, int oldImageId) throws IOException {

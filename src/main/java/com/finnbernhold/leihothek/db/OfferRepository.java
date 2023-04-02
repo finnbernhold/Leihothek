@@ -14,13 +14,13 @@ public interface OfferRepository extends CrudRepository<Offer, Integer> {
 
     List<Offer> findTop21ByOrderByIdDesc();
 
-    @Query("SELECT * from offer o where o.created_by =:userName ")
+    @Query("SELECT * from offer o where o.created_by =:userName ORDER BY id DESC")
     List<Offer> findAllOffersOfUser(@Param("userName") String userName);
 
-    @Query("SELECT * from offer o where o.category like :category AND strpos(LOWER(title), LOWER(:query)) > 0")
+    @Query("SELECT * from offer o where o.category like :category AND strpos(LOWER(title), LOWER(:query)) > 0 ORDER BY id DESC ")
     List<Offer> findByTitleAndCategoryContainingIgnoreCase(Categories category, String query);
 
-    List<Offer> findAllByCategory(Categories category);
+    List<Offer> findAllByCategoryOrderByIdDesc(Categories category);
 
-    List<Offer> findByTitleContainingIgnoreCase(String title);
+    List<Offer> findByTitleContainingIgnoreCaseOrderByIdDesc(String title);
 }
